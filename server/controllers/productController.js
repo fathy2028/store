@@ -144,21 +144,13 @@ export const updateProductController = [
     try {
       const id = req.params.id;
       const { name, description, price, category, quantity, shipping } = req.body;
-      const photo = req.file;
+      const photo = filename;
 
-      const updatedFields = { name, description, price, category, quantity, shipping };
+      const updatedFields = { name, description, price, category, quantity, shipping,photo };
 
       if (name) {
         updatedFields.slug = slugify(name);
       }
-
-      if (photo) {
-        updatedFields.photo = {
-          data: photo.buffer,
-          contentType: photo.mimetype,
-        };
-      }
-
       const updatedProduct = await productModel.findByIdAndUpdate(
         id,
         updatedFields,
