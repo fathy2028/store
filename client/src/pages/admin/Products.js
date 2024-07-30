@@ -167,14 +167,7 @@ const Products = () => {
       title: 'Photo',
       dataIndex: 'photo',
       key: 'photo',
-      render: (photo, record) => (
-        <img
-          src={`${backendUrl}/api/v1/product/get-product-photo/${record._id}`}
-          alt={record.name}
-          width="50"
-          height="50"
-        />
-      ),
+      render: (photo) => <img src={`${backendUrl}/uploads/${photo}`} alt={photo} width="50" height="50" />
     },
     {
       title: 'Actions',

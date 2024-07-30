@@ -86,9 +86,7 @@ const CartPage = () => {
     };
 
     // Function to get the URL for product photo
-    const getProductPhotoUrl = (productId) => {
-        return `${backendUrl}/api/v1/product/get-product-photo/${productId}`;
-    };
+
 
     return (
         <Mylayout>
@@ -112,7 +110,7 @@ const CartPage = () => {
                                         style={{ objectFit: "fill" }} 
                                         width={"100px"} 
                                         height={"100px"} 
-                                        src={getProductPhotoUrl(p._id)} 
+                                        src={`${backendUrl}/uploads/${p.photo}`} 
                                         alt={p.name} 
                                         className='product-image' 
                                     />

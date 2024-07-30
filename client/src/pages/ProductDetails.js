@@ -46,9 +46,7 @@ const ProductDetails = () => {
     };
 
     // Function to get the URL for product photo
-    const getProductPhotoUrl = (productId) => {
-        return `${backendUrl}/api/v1/product/get-product-photo/${productId}`;
-    };
+
 
     return (
         <Mylayout title={"Product Details - Cloud Pharmacy"}>
@@ -58,7 +56,7 @@ const ProductDetails = () => {
                         style={{ objectFit: "cover" }} 
                         height={"400px"} 
                         width={"400px"} 
-                        src={getProductPhotoUrl(product._id)} 
+                        src={`${backendUrl}/uploads/${product.photo}`} 
                         alt={product.name}  
                     />
                 </div>
@@ -88,7 +86,7 @@ const ProductDetails = () => {
                         <div key={product._id} className='product-card'>
                             <img 
                                 style={{ objectFit: "cover" }} 
-                                src={getProductPhotoUrl(product._id)} 
+                                src={`${backendUrl}/uploads/${product.photo}`} 
                                 alt={product.name} 
                                 className='product-image' 
                             />

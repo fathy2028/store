@@ -42,9 +42,7 @@ const Category = () => {
     }, [id]);
 
     // Function to get the URL for product photo
-    const getProductPhotoUrl = (productId) => {
-        return `${backendUrl}/api/v1/product/get-product-photo/${productId}`;
-    };
+
 
     return (
         <Mylayout title={`Products in ${category.name} - Cloud Pharmacy`}>
@@ -56,7 +54,7 @@ const Category = () => {
                             products.map(product => (
                                 <div key={product._id} className='product-card'>
                                     <img 
-                                        src={getProductPhotoUrl(product._id)} 
+                                        src={`${backendUrl}/uploads/${product.photo}`} 
                                         alt={product.name} 
                                         className='product-image' 
                                     />

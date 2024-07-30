@@ -185,34 +185,48 @@ export const updateProductController = [
 
 // Delete Product Controller
 export const deleteProductController = async (req, res) => {
-    try {
+  try {
       const id = req.params.id;
-  
-      // Find and delete the product
-      const deletedProduct = await productModel.findByIdAndDelete(id);
-      if (!deletedProduct) {
-        return res.status(404).send({
-          success: false,
-          message: "Product not found"
-        });
+      const product = await productModel.findById(id);
+
+      if (!product) {
+          return res.status(404).send({
+              success: false,
+              message: "Product not found"
+          });
       }
-  
-      // Find and delete orders that include the deleted product
-      await orderModel.deleteMany({ products: id });
-  
+
+      // Check if the product exists in any orders
+      const orders = await orderModel.find({ products: id });
+      if (orders.length > 0) {
+          return res.status(400).send({
+              success: false,
+              message: "Cannot delete product as it exists in orders"
+          });
+      }
+
+      const photoPath = path.join(__dirname, '..', 'uploads', product.photo);
+
+      // Remove the photo file from the uploads folder
+      if (fs.existsSync(photoPath)) {
+          fs.unlinkSync(photoPath);
+      }
+
+      await productModel.findByIdAndDelete(id);
+
       res.status(200).send({
-        success: true,
-        message: "Product and related orders deleted successfully"
+          success: true,
+          message: "Product deleted successfully"
       });
-    } catch (error) {
+  } catch (error) {
       console.log(error);
       res.status(500).send({
-        success: false,
-        message: "Error in deleting product",
-        error
+          success: false,
+          message: "Error in deleting product",
+          error
       });
-    }
-  };
+  }
+};
 // Product Filter Controller
 export const productFillterController = async (req, res) => {
     try {

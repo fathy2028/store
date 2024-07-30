@@ -85,9 +85,7 @@ const AllOrders = () => {
         order.customer && order.customer.name && order.customer.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    const getProductPhotoUrl = (productId) => {
-        return `${backendUrl}/api/v1/product/get-product-photo/${productId}`;
-    };
+
 
     return (
         <Mylayout title={"Dashboard - All Orders"}>
@@ -122,7 +120,7 @@ const AllOrders = () => {
                                             {order.products.map((product) => (
                                                 <div key={product._id} className="d-flex align-items-center me-2 mb-2">
                                                     <img
-                                                        src={getProductPhotoUrl(product._id)}
+                                                        src={`${backendUrl}/uploads/${product.photo}`}
                                                         alt={product.name}
                                                         width="50"
                                                         height="50"

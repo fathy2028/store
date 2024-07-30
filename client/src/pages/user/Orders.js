@@ -54,9 +54,7 @@ const Orders = () => {
   };
 
   // Function to get the URL for product photo
-  const getProductPhotoUrl = (productId) => {
-    return `${backendUrl}/api/v1/product/get-product-photo/${productId}`;
-  };
+
 
   return (
     <Mylayout title={"Dashboard - Orders"}>
@@ -86,7 +84,7 @@ const Orders = () => {
                       <div key={product._id} className="row mb-2">
                         <div className="col-md-4">
                           <img 
-                            src={getProductPhotoUrl(product._id)} 
+                            src={`${backendUrl}/uploads/${product.photo}`} 
                             alt={product.name} 
                             width="100" 
                             height="100" 
